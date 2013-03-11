@@ -14,9 +14,9 @@ function postresolve(remoteip, domain, qtype, records, rcode)
   end
 
   if #records_new == 0 then
-    rcode = pdns.NXDOMAIN
+    rcode_new = pdns.NXDOMAIN
   end
 
-  return rcode, records_new
+  return rcode_new, records_new
 end
 
