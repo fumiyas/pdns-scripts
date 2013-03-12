@@ -1,7 +1,7 @@
 -- PowerDNS recursor: Filter AAAA records
 -- Copyright (c) 2013 SATOH Fumiyasu @ OSS Technology Corp., Japan
 --
--- This program is released under the terms of the GNU Public License v3
+-- License GPLv3+: GNU GPL version 3 or later
 
 function postresolve(remoteip, domain, qtype, records, rcode)
   rcode_new = rcode
