@@ -8,12 +8,13 @@
 -- PowerDNS recursor 3.4+ is required
 
 function postresolve(remoteip, domain, qtype, records, rcode)
-  rcode_new = rcode
-  records_new = {}
+  local rcode_new = rcode
+  local records_new = {}
+  local i
 
-  for key, record in ipairs(records) do
+  for i, record in ipairs(records) do
     if record.qtype ~= pdns.AAAA then
-      records_new[key] = record
+      records_new[#records_new + 1] = record
     end
   end
 
