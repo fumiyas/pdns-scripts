@@ -13,17 +13,20 @@
 -- use the this script.
 
 function postresolve(remoteip, domain, qtype, records, rcode)
-  if #records >= 2 then
-    --[[
-    for i = #records, 2, -1 do
-      local j = math.random(1, i)
-      records[i], records[j] = records[j], records[i]
-    end
-    --]]
-
-    -- This answer should not be cached in the packet cache
-    setvariable()
+  if #records < 2 then
+    -- No multiple records
+    return rcode, records
   end
+
+  --[[
+  for i = #records, 2, -1 do
+    local j = math.random(1, i)
+    records[i], records[j] = records[j], records[i]
+  end
+  --]]
+
+  -- This answer should not be cached in the packet cache
+  setvariable()
 
   return rcode, records
 end
