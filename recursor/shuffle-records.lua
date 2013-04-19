@@ -10,7 +10,7 @@
 -- PowerDNS recursor 2.9.13+ shuffles answer records, thus you can
 -- get a shuffled records per query if the packet cache is not used.
 -- Set 'disable-packetcache = yes' in your recursor.conf or
--- use the this script.
+-- use this script.
 
 function postresolve(remoteip, domain, qtype, records, rcode)
   if #records < 2 then

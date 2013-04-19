@@ -10,7 +10,6 @@
 function postresolve(remoteip, domain, qtype, records, rcode)
   local rcode_new = rcode
   local records_new = {}
-  local i
 
   for i, record in ipairs(records) do
     if record.qtype ~= pdns.AAAA then
