@@ -1,4 +1,4 @@
--- PowerDNS recursor: Filter records
+-- PowerDNS recursor: Shuffle answer records
 -- Copyright (c) 2013 SATOH Fumiyasu @ OSS Technology Corp., Japan
 --               https://GitHub.com/fumiyas/
 --               https://twitter.com/satoh_fumiyasu
@@ -7,14 +7,21 @@
 --
 -- PowerDNS recursor 3.4+ is required
 
-function postresolve(remoteip, domain, qtype, records, rcode)
-  local i
+-- PowerDNS recursor 2.9.13+ shuffles answer records, thus you can
+-- get a shuffled records per query if the packet cache is not used.
+-- Set 'disable-packetcache = yes' in your recursor.conf or
+-- use the this script.
 
-  for i = #records, 2, -1 do
-    local j = math.random(1, i)
-    records[i], records[j] = records[j], records[i]
+function postresolve(remoteip, domain, qtype, records, rcode)
+  if #records >= 2 then
+    -- for i = #records, 2, -1 do
+    --   local j = math.random(1, i)
+    --   records[i], records[j] = records[j], records[i]
+    -- end
+
+    -- This answer should not be cached in the packet cache
+    setvariable()
   end
-  setvariable()
 
   return rcode, records
 end
