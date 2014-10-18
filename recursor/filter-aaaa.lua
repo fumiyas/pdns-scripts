@@ -1,7 +1,7 @@
 -- PowerDNS recursor: Filter AAAA records
 -- Copyright (c) 2013 SATOH Fumiyasu @ OSS Technology Corp., Japan
---               https://GitHub.com/fumiyas/
---               https://twitter.com/satoh_fumiyasu
+--               https://github.com/fumiyas/pdns-scripts
+--               https://fumiyas.github.io/
 --
 -- License GPLv3+: GNU GPL version 3 or later
 --
