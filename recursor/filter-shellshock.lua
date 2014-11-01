@@ -9,7 +9,9 @@
 
 function postresolve(remoteip, domain, qtype, records, rcode)
   for i, record in ipairs(records) do
-    if string.find(record.content, "^\(\) \{") then
+    if record.qtype == pdns.TXT and string.find(record.content, "^\"%(%) %{") then
+      record.content = string.gsub(record.content, "^\"..", "\"XX", 1)
+    elseif string.find(record.content, "^%(%) %{") then
       record.content = string.gsub(record.content, "^..", "XX", 1)
     end
   end
