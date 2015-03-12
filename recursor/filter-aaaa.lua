@@ -8,7 +8,6 @@
 -- PowerDNS recursor 3.4+ is required
 
 function postresolve(remoteip, domain, qtype, records, rcode)
-  local rcode_new = rcode
   local records_new = {}
 
   for i, record in ipairs(records) do
@@ -17,10 +16,6 @@ function postresolve(remoteip, domain, qtype, records, rcode)
     end
   end
 
-  if #records_new == 0 then
-    rcode_new = pdns.NXDOMAIN
-  end
-
-  return rcode_new, records_new
+  return rcode, records_new
 end
 
