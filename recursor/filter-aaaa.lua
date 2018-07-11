@@ -1,21 +1,23 @@
 -- PowerDNS recursor: Filter AAAA records
--- Copyright (c) 2013 SATOH Fumiyasu @ OSS Technology Corp., Japan
+-- Copyright (c) 2013-2018 SATOH Fumiyasu @ OSS Technology Corp., Japan
 --               https://github.com/fumiyas/pdns-scripts
 --               https://fumiyas.github.io/
 --
 -- License GPLv3+: GNU GPL version 3 or later
 --
--- PowerDNS recursor 3.4+ is required
+-- PowerDNS recursor 4.0+ is required
 
-function postresolve(remoteip, domain, qtype, records, rcode)
+function postresolve(dq)
+  local records = dq:getRecords()
   local records_new = {}
 
   for i, record in ipairs(records) do
-    if record.qtype ~= pdns.AAAA then
+    if record.type ~= pdns.AAAA then
       records_new[#records_new + 1] = record
     end
   end
 
-  return rcode, records_new
-end
+  dq:setRecords(records_new)
 
+  return true
+end
