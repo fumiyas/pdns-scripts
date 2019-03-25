@@ -7,7 +7,18 @@
 --
 -- PowerDNS recursor 4.0+ is required
 
+exclude_domains = {
+  --newDN('google.com'),
+  --newDN('microsoft.com'),
+}
+
 function postresolve(dq)
+  for i, exclude_domain in ipairs(exclude_domains) do
+    if dq.qname:isPartOf(exclude_domain) then
+      return true
+    end
+  end
+
   local records = dq:getRecords()
   local records_new = {}
 
