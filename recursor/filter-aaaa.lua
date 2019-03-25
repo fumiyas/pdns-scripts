@@ -1,5 +1,5 @@
 -- PowerDNS recursor: Filter AAAA records
--- Copyright (c) 2013-2018 SATOH Fumiyasu @ OSS Technology Corp., Japan
+-- Copyright (c) 2013-2019 SATOH Fumiyasu @ OSS Technology Corp., Japan
 --               https://github.com/fumiyas/pdns-scripts
 --               https://fumiyas.github.io/
 --
